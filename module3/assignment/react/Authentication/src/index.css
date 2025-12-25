@@ -1,0 +1,21 @@
+.box{
+  border: 5px solid;
+  padding: 30px;
+}
+
+nav{
+
+  background-color: rgba(12, 1, 22, 0.934);
+  padding: 15px;
+}
+ul{
+  display: flex;
+  justify-content: space-around;
+}
+ul li a{
+
+  color: rgb(232, 224, 224);
+  font-size: 28px;
+  text-decoration: none;
+  margin-inline: 25px;
+}
