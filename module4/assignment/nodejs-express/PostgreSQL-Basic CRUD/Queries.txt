@@ -1,0 +1,16 @@
+create table Students(id SERIAL primary key,name text,email text,age integer,course text,created_at timestamp)
+insert into students (name,email,age,course) values ('Anshika','anshika@gmail.com',18,'Full stack developer'),
+('vanshika','vanshika@gmail.com',23,'Backend developer'),
+('Ragini','ragini@gmail.com',20,'Coumputer science'),
+('Trisha','trisha@gmail.com',25,'Data Analytics'),
+('Shivi','shivi@gmail.com',18,'DevOps developer');
+
+select * from students
+select age from students where age >20
+select name, email from students 
+select course from students
+
+update students set age=26 where name='Anshika'
+update students set course='MCA' where course='Full stack developer'
+delete from students where id=1
+delete from students where age <25
