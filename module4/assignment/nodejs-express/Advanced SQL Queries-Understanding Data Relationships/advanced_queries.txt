@@ -1,0 +1,33 @@
+create table Students(id serial primary key,name text,email text,age integer,course text, created_at TIMESTAMP)
+insert into Students(name,email,age,course) values ('ani','ani@gamil.com',24,'BCA'),
+('anik','anik@gamil.com',24,'Bsc'),
+('anika','anika@gamil.com',20,'Bba'),
+('mini','mini@gamil.com',22,'Bcom'),
+('sini','sini@gamil.com',19,'Bba')
+select * from students
+select count(*) from students
+select avg(age) from students
+select min(age) from students
+select max(age) from students
+select course, count(*) from students group by course
+select * from students where age>20
+SELECT course, COUNT(id)
+FROM students
+GROUP BY course
+HAVING COUNT(id) > 1;
+SELECT course, COUNT(id)
+FROM students
+GROUP BY course
+ORDER BY student_count DESC;
+SELECT id, name, email, age, course
+FROM students
+ORDER BY id DESC
+LIMIT 3;
+SELECT id, name, email, age, course
+FROM students
+ORDER BY age DESC
+LIMIT 5;
+SELECT id, name, email, age, course
+FROM students
+WHERE course = 'BCA'
+ORDER BY age DESC;
