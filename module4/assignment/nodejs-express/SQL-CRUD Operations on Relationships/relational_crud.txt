@@ -1,0 +1,101 @@
+create table usersss (id serial primary key, name text, email text, created_at timestamp default now()); 
+create table orderss (id serial primary key, user_id integer, amount integer, status text, created_at timestamp default now(), foreign key (user_id) references usersss(id));
+
+ insert into usersss (name, email) values ('Ragini','ragini@gmail.com'),
+ ('Anil','anil@gmail.com'),
+ ('Shreya','shreya@gmail.com'),
+ ('Mini','mini@gmail.com'),
+ ('Siri','siri@gmail.com'),
+ ('Sneha','sneha@gmail.com'); 
+ 
+ insert into orderss (user_id, amount, status) values
+  (1,1000,'confirmed'),
+  (1,1500,'processing'),
+  (2,800,'delivered'),
+  (3,1200,'confirmed'),
+  (3,600,'cancelled'),
+  (4,2000,'shipped'),
+  (5,500,'confirmed'),
+  (6,900,'processing'); 
+  select * from usersss;
+
+  ## output-
+  | id | name   | email            | created_at                 |
+| -- | ------ | ---------------- | -------------------------- |
+| 1  | Ragini | ragini@gmail.com | 2026-01-26 18:07:58.011538 |
+| 2  | Anil   | anil@gmail.com   | 2026-01-26 18:07:58.011538 |
+| 3  | Shreya | shreya@gmail.com | 2026-01-26 18:07:58.011538 |
+| 4  | Mini   | mini@gmail.com   | 2026-01-26 18:07:58.011538 |
+| 5  | Siri   | siri@gmail.com   | 2026-01-26 18:07:58.011538 |
+| 6  | Sneha  | sneha@gmail.com  | 2026-01-26 18:07:58.011538 |
+
+select * from orderss;
+
+## output-
+| id | user_id | amount | status     | created_at                 |
+| -- | ------- | ------ | ---------- | -------------------------- |
+| 1  | 1       | 1000   | confirmed  | 2026-01-26 18:08:06.770178 |
+| 2  | 1       | 1500   | processing | 2026-01-26 18:08:06.770178 |
+| 3  | 2       | 800    | delivered  | 2026-01-26 18:08:06.770178 |
+| 4  | 3       | 1200   | confirmed  | 2026-01-26 18:08:06.770178 |
+| 5  | 3       | 600    | cancelled  | 2026-01-26 18:08:06.770178 |
+| 6  | 4       | 2000   | shipped    | 2026-01-26 18:08:06.770178 |
+| 7  | 5       | 500    | confirmed  | 2026-01-26 18:08:06.770178 |
+| 8  | 6       | 900    | processing | 2026-01-26 18:08:06.770178 |
+
+select * from orderss where user_id=1;
+
+## output-
+| id | user_id | amount | status     | created_at                 |
+| -- | ------- | ------ | ---------- | -------------------------- |
+| 1  | 1       | 1000   | confirmed  | 2026-01-26 18:08:06.770178 |
+| 2  | 1       | 1500   | processing | 2026-01-26 18:08:06.770178 |
+
+select u.id,u.name,count(o.id) as total_orders from usersss u join orderss o on u.id=o.user_id group by u.id,u.name having count(o.id)>1;
+
+##output-
+| id | name   | total_orders |
+| -- | ------ | ------------ |
+| 3  | Shreya | 2            |
+| 1  | Ragini | 2            |
+
+select u.id,u.name,sum(o.amount) as total_amount from usersss u join orderss o on u.id=o.user_id group by u.id,u.name; 
+
+##output-
+| id | name   | total_amount |
+| -- | ------ | ------------ |
+| 4  | Mini   | 2000         |
+| 6  | Sneha  | 900          |
+| 2  | Anil   | 800          |
+| 3  | Shreya | 1800         |
+| 5  | Siri   | 500          |
+| 1  | Ragini | 2500         |
+
+update usersss set email='ragini_new@gmail.com' where id=1;
+update orderss set status='delivered' where user_id=3;
+update orderss set amount=1800 where id=2;
+
+##output-
+| id | name   | email                | created_at                 |
+| -- | ------ | -------------------- | -------------------------- |
+| 2  | Anil   | anil@gmail.com       | 2026-01-26 18:07:58.011538 |
+| 3  | Shreya | shreya@gmail.com     | 2026-01-26 18:07:58.011538 |
+| 4  | Mini   | mini@gmail.com       | 2026-01-26 18:07:58.011538 |
+| 5  | Siri   | siri@gmail.com       | 2026-01-26 18:07:58.011538 |
+| 6  | Sneha  | sneha@gmail.com      | 2026-01-26 18:07:58.011538 |
+| 1  | Ragini | ragini_new@gmail.com | 2026-01-26 18:07:58.011538 |
+
+
+| id | user_id | amount | status     | created_at                 |
+| -- | ------- | ------ | ---------- | -------------------------- |
+| 1  | 1       | 1000   | confirmed  | 2026-01-26 18:08:06.770178 |
+| 3  | 2       | 800    | delivered  | 2026-01-26 18:08:06.770178 |
+| 6  | 4       | 2000   | shipped    | 2026-01-26 18:08:06.770178 |
+| 7  | 5       | 500    | confirmed  | 2026-01-26 18:08:06.770178 |
+| 8  | 6       | 900    | processing | 2026-01-26 18:08:06.770178 |
+| 4  | 3       | 1200   | delivered  | 2026-01-26 18:08:06.770178 |
+| 5  | 3       | 600    | delivered  | 2026-01-26 18:08:06.770178 |
+| 2  | 1       | 1800   | processing | 2026-01-26 18:08:06.770178 |
+
+
+
