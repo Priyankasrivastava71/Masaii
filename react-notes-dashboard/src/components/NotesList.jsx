@@ -4,7 +4,7 @@ import { NotesContext } from "../context/NotesContext";
 function NotesList(){
     const { notes, selected, setSelected } = useContext(NotesContext);
     return(
-        <ul>
+        <ul className="notes-list">
             {notes.map((note, index)=>(
                 <li key={index}
                 onClick={()=> setSelected(index)}

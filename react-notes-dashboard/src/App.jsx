@@ -23,8 +23,8 @@ function Dashboard() {
   }, [notes]);
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Notes Dashboard</h2>
+    <div className="dashboard">
+      <h2 className="title">Notes Dashboard</h2>
       <AddNote />
       <NotesList />
       <NotesCount />

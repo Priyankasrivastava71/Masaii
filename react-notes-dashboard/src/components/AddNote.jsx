@@ -17,7 +17,7 @@ function AddNote(){
     }
 
     return (
-        <div>
+        <div className="input-container">
             <input ref={inputRef}
                 value = {input}
                 onChange={(e)=> setInput(e.target.value)} 
